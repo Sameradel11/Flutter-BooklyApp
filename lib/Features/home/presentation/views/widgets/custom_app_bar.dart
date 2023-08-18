@@ -12,8 +12,8 @@ class CustomAppBar extends StatelessWidget {
   Widget build(BuildContext context) {
     return Row(children: [
       Image.asset(
-        AssetsData.logo,
-        scale: 3,
+        AssetsData.logo, height: 16,
+        // scale: 3,
       ),
       const Spacer(
         flex: 8,
@@ -22,7 +22,7 @@ class CustomAppBar extends StatelessWidget {
           onPressed: () {},
           icon: const Icon(
             Icons.search,
-            size: 35,
+            size: 28,
           )),
       const Spacer(
         flex: 1,
