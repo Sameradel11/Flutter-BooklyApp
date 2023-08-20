@@ -1,7 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
-import '../../../../../core/utils/style.dart';
+import '../../../../../../core/utils/style.dart';
 import 'book_cover.dart';
 
 class BookInfo extends StatelessWidget {
