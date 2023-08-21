@@ -18,7 +18,7 @@ class BookDetailsAppBar extends StatelessWidget {
         IconButton(
             onPressed: () {},
             icon: const Icon(
-              Icons.search,
+              Icons.shopping_cart_outlined,
               size: 28,
             )),
         const Spacer(
