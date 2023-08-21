@@ -11,8 +11,7 @@ class BookCover extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      margin:
-          const EdgeInsets.only(right: 16), // Add some spacing between items
+     // Add some spacing between items
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(9),
         image: DecorationImage(

@@ -25,6 +25,9 @@ class BookInfo extends StatelessWidget {
             AspectRatio(
                 aspectRatio: 0.8,
                 child: BookCover(testImage: bookinfo["imagePath"])),
+            const SizedBox(
+              width: 15,
+            ),
             Expanded(
               child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
