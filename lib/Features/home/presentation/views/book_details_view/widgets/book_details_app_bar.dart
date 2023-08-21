@@ -1,9 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
-import '../../../../../../core/utils/assets.dart';
-
-class CustomAppBar extends StatelessWidget {
-  const CustomAppBar({
+class BookDetailsAppBar extends StatelessWidget {
+  const BookDetailsAppBar({
     super.key,
   });
 
@@ -12,9 +11,7 @@ class CustomAppBar extends StatelessWidget {
     return Padding(
       padding: const EdgeInsets.only(left: 30),
       child: Row(children: [
-        Image.asset(
-          AssetsData.logo, height: 16,
-        ),
+        const Icon(FontAwesomeIcons.xmark),
         const Spacer(
           flex: 8,
         ),

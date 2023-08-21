@@ -1,3 +1,5 @@
+// ignore_for_file: constant_identifier_names
+
 import 'package:bookly/Features/Splash/presentation/views/splash_view.dart';
 import 'package:bookly/Features/home/presentation/views/homeView/home_view.dart';
 import 'package:go_router/go_router.dart';
