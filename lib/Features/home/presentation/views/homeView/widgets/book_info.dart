@@ -1,3 +1,4 @@
+import 'package:bookly/const.dart';
 import 'package:flutter/material.dart';
 import '../../../../../../core/utils/style.dart';
 import 'book_cover.dart';
@@ -23,7 +24,7 @@ class BookInfo extends StatelessWidget {
         child: Row(
           children: [
             AspectRatio(
-                aspectRatio: 0.8,
+                aspectRatio: Kcoveraspectration,
                 child: BookCover(testImage: bookinfo["imagePath"])),
             const SizedBox(
               width: 15,
