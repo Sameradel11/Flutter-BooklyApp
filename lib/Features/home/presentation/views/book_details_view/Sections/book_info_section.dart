@@ -1,4 +1,3 @@
-import 'package:bookly/Features/home/presentation/views/book_details_view/Sections/similar_books_section.dart';
 import 'package:bookly/Features/home/presentation/views/book_details_view/widgets/adjacent_contianers.dart';
 import 'package:bookly/Features/home/presentation/views/book_details_view/widgets/rate.dart';
 import 'package:bookly/Features/home/presentation/views/homeView/widgets/book_cover.dart';

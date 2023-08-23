@@ -3,7 +3,6 @@ import 'package:bookly/core/utils/app_route.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 
-
 class SplashViewBody extends StatefulWidget {
   const SplashViewBody({super.key});
 
@@ -58,5 +57,4 @@ class _SplashViewBodyState extends State<SplashViewBody>
       GoRouter.of(context).push(AppRouter.KHomeView);
     });
   }
-  
 }

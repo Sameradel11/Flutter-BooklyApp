@@ -15,8 +15,7 @@ class SlidingLogo extends StatelessWidget {
     return AnimatedBuilder(
       animation: slidinganimation,
       builder: (BuildContext context, Widget? child) => SlideTransition(
-          position: slidinganimation,
-          child: Image.asset(AssetsData.logo)),
+          position: slidinganimation, child: Image.asset(AssetsData.logo)),
     );
   }
 }
