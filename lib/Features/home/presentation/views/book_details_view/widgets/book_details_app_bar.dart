@@ -13,8 +13,8 @@ class BookDetailsAppBar extends StatelessWidget {
           onPressed: () {
             Navigator.pop(context);
           },
-          icon: Icon(FontAwesomeIcons.xmark)),
-      IconButton(onPressed: () {}, icon: Icon(Icons.shopping_cart)),
+          icon: const Icon(FontAwesomeIcons.xmark)),
+      IconButton(onPressed: () {}, icon: const Icon(Icons.shopping_cart)),
     ]);
   }
 }

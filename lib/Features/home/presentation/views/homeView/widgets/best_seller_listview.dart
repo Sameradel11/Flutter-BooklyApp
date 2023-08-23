@@ -9,8 +9,9 @@ class BestSellerListView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ListView.builder(
-        physics: const NeverScrollableScrollPhysics(),
+        shrinkWrap: true,
         padding: EdgeInsets.zero,
+        physics: const NeverScrollableScrollPhysics(),
         itemCount: 10,
         itemBuilder: ((context, index) => GestureDetector(
               child: const BookInfo(),
