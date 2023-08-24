@@ -1,7 +1,5 @@
 import 'package:bookly/Features/home/data/repos/home_repo_imp.dart';
 import 'package:bookly/Features/home/presentation/views/homeView/widgets/home_view_body.dart';
-import 'package:bookly/core/utils/api_services.dart';
-import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 
 class HomeView extends StatefulWidget {
@@ -15,9 +13,7 @@ class _HomeViewState extends State<HomeView> {
   @override
   void initState() {
     super.initState();
-    Dio dio = Dio();
-    HomeRepoImp(apiclass: ApiServices(dio: dio))
-        .fetchFeaturedBooks(subject: "Programming");
+    HomeRepoImp().fetchFeaturedBooks(subject: "Programming");
   }
 
   @override
