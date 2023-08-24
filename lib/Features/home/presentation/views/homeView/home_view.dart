@@ -17,7 +17,7 @@ class _HomeViewState extends State<HomeView> {
     super.initState();
     Dio dio = Dio();
     HomeRepoImp(apiclass: ApiServices(dio: dio))
-        .fetchNewestBooks(subject: "Programming");
+        .fetchFeaturedBooks(subject: "Programming");
   }
 
   @override

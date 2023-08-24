@@ -14,7 +14,8 @@ class HomeRepoImp implements HomeRepo {
       {required String subject}) async {
     try {
       Map<String, dynamic> response = await apiclass.get(
-          endpoints: "volumes?Filtering=free-ebooks&q=subject:$subject");
+          endpoints:
+              "volumes?Filtering=free-ebooks&Sorting=newest&q=subject:$subject");
       List<dynamic> bookitems = response['items'];
       List<BookModel> bookmodels = [];
       for (int i = 0; i < bookitems.length; i++) {
@@ -35,7 +36,14 @@ class HomeRepoImp implements HomeRepo {
   }
 
   @override
-  Future<Either<Failure, List<BookModel>>> fetchFeaturedBooks() {
-    throw UnimplementedError();
+  Future<Either<Failure, List<BookModel>>> fetchFeaturedBooks(
+      {required String subject}) async {
+    Map<String, dynamic> response = await apiclass.get(
+        endpoints: "volumes?Filtering=free-ebooks&q=subject:$subject");
+    List<BookModel> books = [];
+    for (dynamic item in response['items']) {
+      books.add(BookModel.fromJsonData(item as Map<String,dynamic>));
+    }
+    return right(books);
   }
 }
