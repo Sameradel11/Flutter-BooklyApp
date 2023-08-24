@@ -11,7 +11,6 @@ class VolumeInfo extends Equatable {
   final List<String>? authors;
   final String? publisher;
   final String? publishedDate;
-  final String? description;
   final List<IndustryIdentifier>? industryIdentifiers;
   final ReadingModes? readingModes;
   final int? pageCount;
@@ -33,7 +32,6 @@ class VolumeInfo extends Equatable {
     this.authors,
     this.publisher,
     this.publishedDate,
-    this.description,
     this.industryIdentifiers,
     this.readingModes,
     this.pageCount,
@@ -53,10 +51,9 @@ class VolumeInfo extends Equatable {
   factory VolumeInfo.fromJsonData(Map<String, dynamic> json) => VolumeInfo(
         title: json['title'] as String?,
         subtitle: json['subtitle'] as String?,
-        authors: json['authors'] as List<String>?,
+        authors: List<String>.from( json['authors'] ),
         publisher: json['publisher'] as String?,
         publishedDate: json['publishedDate'] as String?,
-        description: json['description'] as String?,
         industryIdentifiers: (json['industryIdentifiers'] as List<dynamic>?)
             ?.map((e) =>
                 IndustryIdentifier.fromJsonData(e as Map<String, dynamic>))
@@ -67,7 +64,7 @@ class VolumeInfo extends Equatable {
                 json['readingModes'] as Map<String, dynamic>),
         pageCount: json['pageCount'] as int?,
         printType: json['printType'] as String?,
-        categories: json['categories'] as List<String>?,
+        categories: List<String>.from(json['categories']),
         maturityRating: json['maturityRating'] as String?,
         allowAnonLogging: json['allowAnonLogging'] as bool?,
         contentVersion: json['contentVersion'] as String?,
@@ -91,7 +88,6 @@ class VolumeInfo extends Equatable {
         'authors': authors,
         'publisher': publisher,
         'publishedDate': publishedDate,
-        'description': description,
         'industryIdentifiers':
             industryIdentifiers?.map((e) => e.toJsonData()).toList(),
         'readingModes': readingModes?.toJsonData(),
@@ -117,7 +113,6 @@ class VolumeInfo extends Equatable {
       authors,
       publisher,
       publishedDate,
-      description,
       industryIdentifiers,
       readingModes,
       pageCount,
