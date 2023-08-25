@@ -6,8 +6,7 @@ class ApiServices {
 
   Future<Map<String, dynamic>> get({required String endpoints}) async {
     var response = await dio.get('$baseurl$endpoints');
-    print("Response is $response");
-    print("but the data only in that response is ${response.data}");
+    print("$baseurl$endpoints");
     return response.data;
   }
 }

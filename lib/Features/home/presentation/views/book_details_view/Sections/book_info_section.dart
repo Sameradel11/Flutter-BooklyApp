@@ -1,12 +1,14 @@
+import 'package:bookly/Features/home/data/models/book_model/book_model.dart';
 import 'package:bookly/Features/home/presentation/views/book_details_view/widgets/adjacent_contianers.dart';
 import 'package:bookly/Features/home/presentation/views/book_details_view/widgets/rate.dart';
+import 'package:bookly/Features/home/presentation/views/homeView/widgets/authors.dart';
 import 'package:bookly/Features/home/presentation/views/homeView/widgets/book_cover.dart';
 import 'package:bookly/core/utils/style.dart';
 import 'package:flutter/material.dart';
 
 class BookInfoSection extends StatelessWidget {
-  const BookInfoSection({super.key});
-
+  const BookInfoSection({super.key, required this.book});
+  final BookModel book;
   @override
   Widget build(BuildContext context) {
     return Column(
@@ -14,34 +16,29 @@ class BookInfoSection extends StatelessWidget {
       children: [
         SizedBox(
           width: MediaQuery.of(context).size.width * 0.45,
-          child: const AspectRatio(
+          child: AspectRatio(
               aspectRatio: 0.7,
               child: BookCover(
-                imagelink: 'https://unsplash.com/photos/dSBJv66Yjlk',
+                imagelink: book.volumeInfo!.imageLinks!.thumbnail!,
               )),
         ),
         const SizedBox(
           height: 50,
         ),
-        const Text(
-          "The Jungle Book",
+        Text(
+          book.volumeInfo!.title!,
           style: Style.textStyle22,
         ),
         const SizedBox(
           height: 10,
         ),
-        Text(
-          "Any author here",
-          style: Style.textStyle16.copyWith(fontStyle: FontStyle.italic),
-        ),
+        Authors(authors: book.volumeInfo!.authors!),
         const SizedBox(
           height: 15,
         ),
         const Rate(),
-        const SizedBox(
-          height: 20,
-        ),
-        const AdjacentContainers(),
+        const SizedBox(height: 30),
+        AdjacentContainers(book: book),
         const SizedBox(
           height: 30,
         ),

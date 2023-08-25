@@ -1,10 +1,14 @@
+import 'package:bookly/Features/home/data/models/book_model/book_model.dart';
 import 'package:bookly/core/utils/style.dart';
 import 'package:flutter/material.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 class AdjacentContainers extends StatelessWidget {
   const AdjacentContainers({
     super.key,
+    required this.book,
   });
+  final BookModel book;
 
   @override
   Widget build(BuildContext context) {
@@ -47,25 +51,54 @@ class AdjacentContainers extends StatelessWidget {
           height: 50,
           width: MediaQuery.of(context).size.width * .4,
           child: TextButton(
-            onPressed: () {},
-            style: TextButton.styleFrom(
-                backgroundColor: Colors.white,
-                shape: const RoundedRectangleBorder(
-                    borderRadius: BorderRadius.only(
-                        topLeft: Radius.circular(12),
-                        bottomLeft: Radius.circular(12)))),
-            child: Text(
-              "19,99C",
-              style: Style.textStyle18
-                  .copyWith(color: Colors.black, fontWeight: FontWeight.w800),
-            ),
-          ),
+              onPressed: () {},
+              style: TextButton.styleFrom(
+                  backgroundColor: Colors.white,
+                  shape: const RoundedRectangleBorder(
+                      borderRadius: BorderRadius.only(
+                          topLeft: Radius.circular(12),
+                          bottomLeft: Radius.circular(12)))),
+              child: book.saleInfo!.listPrice == null
+                  ? Text(
+                      "Free",
+                      style: Style.textStyle18.copyWith(
+                          color: Colors.black, fontWeight: FontWeight.w800),
+                    )
+                  : Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      mainAxisSize: MainAxisSize.max,
+                      children: [
+                        Text(
+                          " ${book.saleInfo!.listPrice!.amount!.toString()}",
+                          style: Style.textstyle18.copyWith(
+                              fontWeight: FontWeight.w700, color: Colors.black),
+                        ),
+                        Opacity(
+                          opacity: 0.7,
+                          child: Text(
+                            " ${book.saleInfo!.listPrice!.currencyCode.toString()}",
+                            style:
+                                Style.textStyle14.copyWith(color: Colors.black),
+                          ),
+                        )
+                      ],
+                    ),),
         ),
         SizedBox(
           height: 50,
           width: MediaQuery.of(context).size.width * .4,
           child: TextButton(
-            onPressed: () {},
+            onPressed: () async {
+              final url = Uri.parse(book.volumeInfo!.previewLink!);
+              bool urllaunchable = await canLaunchUrl(url);
+
+              if (urllaunchable) {
+                await launchUrl(url,mode: LaunchMode.externalApplication);
+              } else {
+                ScaffoldMessenger.of(context).showSnackBar(
+                    const SnackBar(content: Text("Can't Launch Right now")));
+              }
+            },
             style: TextButton.styleFrom(
                 backgroundColor: const Color(0xffffef8262),
                 shape: const RoundedRectangleBorder(

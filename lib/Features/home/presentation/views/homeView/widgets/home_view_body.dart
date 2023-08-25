@@ -1,5 +1,4 @@
 import 'package:bookly/Features/home/data/models/book_model/book_model.dart';
-import 'package:bookly/Features/home/presentation/view_model/cubit/book_cubit.dart';
 import 'package:bookly/Features/home/presentation/view_model/new_books/new_books_cubit.dart';
 import 'package:bookly/Features/home/presentation/views/homeView/widgets/book_info.dart';
 import 'package:bookly/core/utils/app_route.dart';
@@ -61,7 +60,7 @@ class HomeViewBody extends StatelessWidget {
                       (BuildContext context, int index) {
                         return GestureDetector(
                             onTap: () => GoRouter.of(context)
-                                .push(AppRouter.KDetailsView),
+                                .push(AppRouter.KDetailsView, extra: booklist![index]),
                             child: BookInfo(
                               book: booklist![index],
                             ));

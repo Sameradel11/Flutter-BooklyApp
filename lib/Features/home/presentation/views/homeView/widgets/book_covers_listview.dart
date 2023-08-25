@@ -1,5 +1,4 @@
 import 'package:bookly/Features/home/data/models/book_model/book_model.dart';
-import 'package:bookly/Features/home/presentation/view_model/cubit/book_cubit.dart';
 import 'package:bookly/Features/home/presentation/view_model/new_books/new_books_cubit.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -51,7 +50,9 @@ class BookCoversListView extends StatelessWidget {
                     itemBuilder: (context, index) {
                       return AspectRatio(
                         aspectRatio: 0.6,
-                        child: BookCover(
+                        child:booklist[index]
+                                .volumeInfo!
+                                .imageLinks==null?const CircularProgressIndicator(): BookCover(
                             imagelink: booklist[index]
                                 .volumeInfo!
                                 .imageLinks!

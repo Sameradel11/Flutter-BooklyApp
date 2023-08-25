@@ -1,4 +1,6 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
+import 'package:bookly/Features/home/presentation/views/homeView/widgets/apiprice.dart';
+import 'package:bookly/Features/home/presentation/views/homeView/widgets/authors.dart';
 import 'package:flutter/material.dart';
 
 import 'package:bookly/Features/home/data/models/book_model/book_model.dart';
@@ -28,7 +30,7 @@ class BookInfo extends StatelessWidget {
               width: MediaQuery.of(context).size.height * .09,
               child: AspectRatio(
                   aspectRatio: Kcoveraspectration,
-                  child: BookCover(
+                  child: book.volumeInfo!.imageLinks==null?const CircularProgressIndicator(): BookCover(
                     imagelink: book.volumeInfo!.imageLinks!.thumbnail!,
                   )),
             ),
@@ -46,41 +48,17 @@ class BookInfo extends StatelessWidget {
                       maxLines: 2,
                     ),
                     const SizedBox(
-                      height: 3,
+                      height: 5,
                     ),
                     Authors(authors: book.volumeInfo!.authors!),
-                    const SizedBox(
-                      height: 3,
-                    ),
                     PriceAndRate(
                       book: book,
-                    )
+                    ),
                   ]),
             )
           ],
         ),
       ),
-    );
-  }
-}
-
-class Authors extends StatelessWidget {
-  const Authors({super.key, required this.authors});
-  final List<String> authors;
-
-  @override
-  Widget build(BuildContext context) {
-    List<Text> authorswidgets = [];
-    for (String author in authors) {
-      authorswidgets.add(Text(
-        author,maxLines: 1,overflow: TextOverflow.ellipsis,
-        style: Style.textStyle16,
-      ));
-    }
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      mainAxisSize: MainAxisSize.min,
-      children: authorswidgets,
     );
   }
 }
@@ -102,23 +80,7 @@ class PriceAndRate extends StatelessWidget {
                 'Free Book',
                 style: Style.textstyle20.copyWith(fontWeight: FontWeight.w400),
               )
-            : Row(
-                mainAxisSize: MainAxisSize.max,
-                children: [
-                  Text(
-                    " ${book.saleInfo!.listPrice!.amount!.toString()}",
-                    style:
-                        Style.textStyle22.copyWith(fontWeight: FontWeight.w400),
-                  ),
-                  Opacity(
-                    opacity: 0.7,
-                    child: Text(
-                      book.saleInfo!.listPrice!.currencyCode.toString(),
-                      style: Style.textStyle14.copyWith(),
-                    ),
-                  )
-                ],
-              ),
+            : Price(book: book),
         const Spacer(
           flex: 1,
         ),

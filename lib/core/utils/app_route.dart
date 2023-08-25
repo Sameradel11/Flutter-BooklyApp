@@ -1,6 +1,7 @@
 // ignore_for_file: constant_identifier_names
 
 import 'package:bookly/Features/Splash/presentation/views/splash_view.dart';
+import 'package:bookly/Features/home/data/models/book_model/book_model.dart';
 import 'package:bookly/Features/home/presentation/views/homeView/home_view.dart';
 import 'package:bookly/Features/search/presentation/views/search_view.dart';
 import 'package:go_router/go_router.dart';
@@ -17,7 +18,7 @@ abstract class AppRouter {
     GoRoute(path: KHomeView, builder: (context, state) => const HomeView()),
     GoRoute(
         path: KDetailsView,
-        builder: ((context, state) => const BookDetailsView())),
+        builder: ((context, state) =>  BookDetailsView(book:state.extra as BookModel))),
     GoRoute(path: KSearchView, builder: (context, state) => const SearchView()),
   ]);
 }
