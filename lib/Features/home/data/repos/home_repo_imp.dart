@@ -37,7 +37,7 @@ class HomeRepoImp implements HomeRepo {
   Future<Either<Failure, List<BookModel>>> fetchFeaturedBooks(
       {required String subject}) async {
     Map<String, dynamic> response = await apiclass.get(
-        endpoints: "volumes?Filtering=free-ebooks&q=subject:$subject");
+        endpoints: "volumes?Filtering=free-ebooks&q=$subject");
     List<BookModel> books = [];
     for (dynamic item in response['items']) {
       books.add(BookModel.fromJsonData(item as Map<String,dynamic>));

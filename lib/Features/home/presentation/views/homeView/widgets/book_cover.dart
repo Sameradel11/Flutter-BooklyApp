@@ -3,10 +3,9 @@ import "package:flutter/material.dart";
 class BookCover extends StatelessWidget {
   const BookCover({
     super.key,
-    required this.testImage,
+    required this.imagelink,
   });
-
-  final String testImage;
+  final String imagelink;
 
   @override
   Widget build(BuildContext context) {
@@ -16,7 +15,7 @@ class BookCover extends StatelessWidget {
         borderRadius: BorderRadius.circular(9),
         image: DecorationImage(
           fit: BoxFit.fill,
-          image: AssetImage(testImage), // Use the image from the list
+          image: NetworkImage(imagelink), // Use the image from the list
         ),
       ),
     );

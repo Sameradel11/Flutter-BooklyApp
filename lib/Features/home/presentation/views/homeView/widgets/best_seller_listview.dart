@@ -14,7 +14,7 @@ class BestSellerListView extends StatelessWidget {
         physics: const NeverScrollableScrollPhysics(),
         itemCount: 10,
         itemBuilder: ((context, index) => GestureDetector(
-              child: const BookInfo(),
+              // child: const BookInfo(),
               onTap: () {
                 GoRouter.of(context).push(AppRouter.KDetailsView);
               },

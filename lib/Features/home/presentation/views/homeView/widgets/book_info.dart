@@ -1,31 +1,37 @@
-import 'package:bookly/const.dart';
+// ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'package:flutter/material.dart';
+
+import 'package:bookly/Features/home/data/models/book_model/book_model.dart';
+import 'package:bookly/const.dart';
+
 import '../../../../../../core/utils/style.dart';
 import 'book_cover.dart';
 
 class BookInfo extends StatelessWidget {
-  const BookInfo({super.key});
+  const BookInfo({super.key, required this.book});
+  final BookModel book;
 
   @override
   Widget build(BuildContext context) {
-    const Map<String, dynamic> bookinfo = {
-      "imagePath": "Assets/Images/photo1.jpg",
-      'BookName': "Harry Potter and the coblet of Fire",
-      "BookRate": {"Rate": "4.8", "Votes": "2123"},
-      'BookAuthor': "j.K Rowling",
-      "BookPrice": "19.99"
-    };
-
     return Padding(
       padding: const EdgeInsets.only(left: 22, right: 20, bottom: 20),
-      child: SizedBox(
-        height: MediaQuery.of(context).size.height * .13,
+      child: Container(
+        constraints: BoxConstraints(
+          minHeight: MediaQuery.of(context).size.height * .13,
+          // maxHeight: MediaQuery.of(context).size.height * .3,
+        ),
         // color: Colors.grey,
         child: Row(
+          mainAxisSize: MainAxisSize.max,
           children: [
-            AspectRatio(
-                aspectRatio: Kcoveraspectration,
-                child: BookCover(testImage: bookinfo["imagePath"])),
+            SizedBox(
+              width: MediaQuery.of(context).size.height * .09,
+              child: AspectRatio(
+                  aspectRatio: Kcoveraspectration,
+                  child: BookCover(
+                    imagelink: book.volumeInfo!.imageLinks!.thumbnail!,
+                  )),
+            ),
             const SizedBox(
               width: 15,
             ),
@@ -34,21 +40,21 @@ class BookInfo extends StatelessWidget {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Text(
-                      bookinfo["BookName"],
+                      book.volumeInfo!.title!,
                       style: Style.textstyle20,
+                      overflow: TextOverflow.ellipsis,
                       maxLines: 2,
                     ),
                     const SizedBox(
                       height: 3,
                     ),
-                    Text(
-                      bookinfo["BookAuthor"],
-                      style: Style.textStyle16,
-                    ),
+                    Authors(authors: book.volumeInfo!.authors!),
                     const SizedBox(
                       height: 3,
                     ),
-                    const PriceAndRate(bookinfo: bookinfo)
+                    PriceAndRate(
+                      book: book,
+                    )
                   ]),
             )
           ],
@@ -58,35 +64,76 @@ class BookInfo extends StatelessWidget {
   }
 }
 
+class Authors extends StatelessWidget {
+  const Authors({super.key, required this.authors});
+  final List<String> authors;
+
+  @override
+  Widget build(BuildContext context) {
+    List<Text> authorswidgets = [];
+    for (String author in authors) {
+      authorswidgets.add(Text(
+        author,maxLines: 1,overflow: TextOverflow.ellipsis,
+        style: Style.textStyle16,
+      ));
+    }
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      mainAxisSize: MainAxisSize.min,
+      children: authorswidgets,
+    );
+  }
+}
+
 class PriceAndRate extends StatelessWidget {
   const PriceAndRate({
-    super.key,
-    required this.bookinfo,
-  });
+    Key? key,
+    required this.book,
+  }) : super(key: key);
 
-  final Map<String, dynamic> bookinfo;
+  final BookModel book;
 
   @override
   Widget build(BuildContext context) {
     return Row(
       children: [
-        Text(
-          "${bookinfo['BookPrice']} \$",
-          style: Style.textStyle22.copyWith(fontWeight: FontWeight.w600),
+        book.saleInfo!.listPrice == null
+            ? Text(
+                'Free Book',
+                style: Style.textstyle20.copyWith(fontWeight: FontWeight.w400),
+              )
+            : Row(
+                mainAxisSize: MainAxisSize.max,
+                children: [
+                  Text(
+                    " ${book.saleInfo!.listPrice!.amount!.toString()}",
+                    style:
+                        Style.textStyle22.copyWith(fontWeight: FontWeight.w400),
+                  ),
+                  Opacity(
+                    opacity: 0.7,
+                    child: Text(
+                      book.saleInfo!.listPrice!.currencyCode.toString(),
+                      style: Style.textStyle14.copyWith(),
+                    ),
+                  )
+                ],
+              ),
+        const Spacer(
+          flex: 1,
         ),
-        const Spacer(),
         Row(
           children: [
             Icon(
               Icons.star,
               color: Colors.amber.shade300,
             ),
-            Text(
-              "${bookinfo["BookRate"]["Rate"]} ",
+            const Text(
+              "4.8 ",
               style: Style.textstyle20,
             ),
-            Text(
-              "(${bookinfo["BookRate"]["Votes"]})",
+            const Text(
+              "2289",
               style: Style.textStyle16,
             )
           ],

@@ -16,7 +16,9 @@ class BookInfoSection extends StatelessWidget {
           width: MediaQuery.of(context).size.width * 0.45,
           child: const AspectRatio(
               aspectRatio: 0.7,
-              child: BookCover(testImage: "Assets/Images/photo1.jpg")),
+              child: BookCover(
+                imagelink: 'https://unsplash.com/photos/dSBJv66Yjlk',
+              )),
         ),
         const SizedBox(
           height: 50,

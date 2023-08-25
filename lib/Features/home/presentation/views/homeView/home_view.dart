@@ -1,4 +1,3 @@
-import 'package:bookly/Features/home/data/repos/home_repo_imp.dart';
 import 'package:bookly/Features/home/presentation/views/homeView/widgets/home_view_body.dart';
 import 'package:flutter/material.dart';
 
@@ -12,8 +11,8 @@ class HomeView extends StatefulWidget {
 class _HomeViewState extends State<HomeView> {
   @override
   void initState() {
-    super.initState();
-    HomeRepoImp().fetchFeaturedBooks(subject: "Programming");
+    // super.initState();
+    // HomeRepoImp().fetchFeaturedBooks(subject: "Programming");
   }
 
   @override

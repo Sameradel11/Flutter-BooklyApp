@@ -18,9 +18,11 @@ class SimilarBooksListView extends StatelessWidget {
       child: ListView.separated(
         scrollDirection: Axis.horizontal,
         itemCount: testImages.length,
-        itemBuilder: (context, index) => AspectRatio(
+        itemBuilder: (context, index) => const AspectRatio(
             aspectRatio: Kcoveraspectration,
-            child: BookCover(testImage: testImages[index])),
+            child: BookCover(
+              imagelink: 'https://unsplash.com/photos/dSBJv66Yjlk',
+            )),
         separatorBuilder: (BuildContext context, int index) {
           return const SizedBox(
             width: 10,
