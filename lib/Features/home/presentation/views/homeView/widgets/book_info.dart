@@ -30,7 +30,7 @@ class BookInfo extends StatelessWidget {
               width: MediaQuery.of(context).size.height * .09,
               child: AspectRatio(
                   aspectRatio: Kcoveraspectration,
-                  child: book.volumeInfo!.imageLinks==null?const CircularProgressIndicator(): BookCover(
+                  child: book.volumeInfo!.imageLinks==null?const Center(child:  CircularProgressIndicator()): BookCover(
                     imagelink: book.volumeInfo!.imageLinks!.thumbnail!,
                   )),
             ),

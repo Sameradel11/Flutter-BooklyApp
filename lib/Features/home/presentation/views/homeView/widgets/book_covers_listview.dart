@@ -42,21 +42,22 @@ class BookCoversListView extends StatelessWidget {
           child: SizedBox(
             height: MediaQuery.of(context).size.height * 0.3,
             child: BlocProvider.of<NewBooksCubit>(context).isloading
-                ? const CircularProgressIndicator()
+                ? const Center(child: CircularProgressIndicator())
                 : ListView.separated(
+                    physics: const BouncingScrollPhysics(),
                     scrollDirection: Axis.horizontal,
                     itemCount:
                         booklist.length, // Use the length of your image list
                     itemBuilder: (context, index) {
                       return AspectRatio(
                         aspectRatio: 0.6,
-                        child:booklist[index]
-                                .volumeInfo!
-                                .imageLinks==null?const CircularProgressIndicator(): BookCover(
-                            imagelink: booklist[index]
-                                .volumeInfo!
-                                .imageLinks!
-                                .thumbnail!),
+                        child: booklist[index].volumeInfo!.imageLinks == null
+                            ? const Center(child: CircularProgressIndicator())
+                            : BookCover(
+                                imagelink: booklist[index]
+                                    .volumeInfo!
+                                    .imageLinks!
+                                    .thumbnail!),
                       );
                     },
                     separatorBuilder: (BuildContext context, int index) {
