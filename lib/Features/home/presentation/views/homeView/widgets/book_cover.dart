@@ -1,3 +1,4 @@
+import "package:cached_network_image/cached_network_image.dart";
 import "package:flutter/material.dart";
 
 class BookCover extends StatelessWidget {
@@ -9,14 +10,13 @@ class BookCover extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      // Add some spacing between items
-      decoration: BoxDecoration(
-        borderRadius: BorderRadius.circular(9),
-        image: DecorationImage(
-          fit: BoxFit.fill,
-          image: NetworkImage(imagelink), // Use the image from the list
-        ),
+    return ClipRRect(
+      borderRadius: BorderRadius.circular(16),
+      child: CachedNetworkImage(
+        errorWidget: (context, url, error) =>  const  Center(child: Icon(Icons.error),),
+        placeholder:(context, url) => const Center(child: CircularProgressIndicator(),) ,
+        imageUrl: imagelink,
+        fit: BoxFit.fill,
       ),
     );
   }

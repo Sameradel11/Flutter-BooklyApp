@@ -14,7 +14,7 @@ class HomeRepoImp implements HomeRepo {
       print("fetchNewestBooks");
       Map<String, dynamic> response = await apiclass.get(
           endpoints:
-              "volumes?Filtering=free-ebooks&Sorting=newest&q=subject:$subject");
+              "volumes?Filtering=free-ebooks&sorting=newest&q=subject:$subject");
       List<dynamic> bookitems = response['items'];
       List<BookModel> bookmodels = [];
       for (int i = 0; i < bookitems.length; i++) {

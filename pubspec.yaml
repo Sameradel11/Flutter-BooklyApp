@@ -40,6 +40,7 @@ dependencies:
   go_router: ^10.1.0
   google_fonts: ^4.0.4
   sliver_tools: ^0.2.5
+  cached_network_image: ^3.2.3
 
 dev_dependencies:
   flutter_lints: ^2.0.0

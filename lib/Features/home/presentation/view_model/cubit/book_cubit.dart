@@ -15,7 +15,7 @@ class FeaturedBookCubit extends Cubit<FeaturedBooksStates> {
 
   fetchFeaturedBooks({required String subject}) async {
     emit(FeaturedBooksLoading());
-    var result = await HomeRepoImp().fetchNewestBooks(subject: subject);
+    var result = await HomeRepoImp().fetchFeaturedBooks(subject: subject);
     result.fold((failure) {
       emit(FeaturedBooksFailure(errmessage: failure.errmessage));
     }, (books) {
