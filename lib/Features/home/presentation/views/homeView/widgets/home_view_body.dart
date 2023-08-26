@@ -26,7 +26,7 @@ class HomeViewBody extends StatelessWidget {
           booklist = state.bookslist;
           BlocProvider.of<NewBooksCubit>(context).isloading = false;
         } else if (state is NewBooksFailure) {
-          BlocProvider.of<NewBooksCubit>(context).isloading = true;
+          BlocProvider.of<NewBooksCubit>(context).isloading = false;
           ScaffoldMessenger.of(context)
               .showSnackBar(SnackBar(content: Text(state.errmessage)));
         }
@@ -58,14 +58,16 @@ class HomeViewBody extends StatelessWidget {
                 : SliverList(
                     delegate: SliverChildBuilderDelegate(
                       (BuildContext context, int index) {
-                        return GestureDetector(
-                            onTap: () => GoRouter.of(context)
-                                .push(AppRouter.KDetailsView, extra: booklist![index]),
-                            child: BookInfo(
-                              book: booklist![index],
-                            ));
+                        return booklist![index].volumeInfo!.imageLinks == null
+                            ? const SizedBox()
+                            : GestureDetector(
+                                onTap: () => GoRouter.of(context).push(
+                                    AppRouter.KDetailsView,
+                                    extra: booklist![index]),
+                                child: BookInfo(
+                                  book: booklist![index],
+                                ));
                       },
-                      // 40 list items
                       childCount: booklist!.length,
                     ),
                   ),

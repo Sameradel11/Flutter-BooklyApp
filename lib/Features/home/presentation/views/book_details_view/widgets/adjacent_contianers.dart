@@ -51,38 +51,39 @@ class AdjacentContainers extends StatelessWidget {
           height: 50,
           width: MediaQuery.of(context).size.width * .4,
           child: TextButton(
-              onPressed: () {},
-              style: TextButton.styleFrom(
-                  backgroundColor: Colors.white,
-                  shape: const RoundedRectangleBorder(
-                      borderRadius: BorderRadius.only(
-                          topLeft: Radius.circular(12),
-                          bottomLeft: Radius.circular(12)))),
-              child: book.saleInfo!.listPrice == null
-                  ? Text(
-                      "Free",
-                      style: Style.textStyle18.copyWith(
-                          color: Colors.black, fontWeight: FontWeight.w800),
-                    )
-                  : Row(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      mainAxisSize: MainAxisSize.max,
-                      children: [
-                        Text(
-                          " ${book.saleInfo!.listPrice!.amount!.toString()}",
-                          style: Style.textstyle18.copyWith(
-                              fontWeight: FontWeight.w700, color: Colors.black),
+            onPressed: () {},
+            style: TextButton.styleFrom(
+                backgroundColor: Colors.white,
+                shape: const RoundedRectangleBorder(
+                    borderRadius: BorderRadius.only(
+                        topLeft: Radius.circular(12),
+                        bottomLeft: Radius.circular(12)))),
+            child: book.saleInfo!.listPrice == null
+                ? Text(
+                    "Free",
+                    style: Style.textStyle18.copyWith(
+                        color: Colors.black, fontWeight: FontWeight.w800),
+                  )
+                : Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    mainAxisSize: MainAxisSize.max,
+                    children: [
+                      Text(
+                        " ${book.saleInfo!.listPrice!.amount!.toString()}",
+                        style: Style.textstyle18.copyWith(
+                            fontWeight: FontWeight.w700, color: Colors.black),
+                      ),
+                      Opacity(
+                        opacity: 0.7,
+                        child: Text(
+                          " ${book.saleInfo!.listPrice!.currencyCode.toString()}",
+                          style:
+                              Style.textStyle14.copyWith(color: Colors.black),
                         ),
-                        Opacity(
-                          opacity: 0.7,
-                          child: Text(
-                            " ${book.saleInfo!.listPrice!.currencyCode.toString()}",
-                            style:
-                                Style.textStyle14.copyWith(color: Colors.black),
-                          ),
-                        )
-                      ],
-                    ),),
+                      )
+                    ],
+                  ),
+          ),
         ),
         SizedBox(
           height: 50,
@@ -93,7 +94,7 @@ class AdjacentContainers extends StatelessWidget {
               bool urllaunchable = await canLaunchUrl(url);
 
               if (urllaunchable) {
-                await launchUrl(url,mode: LaunchMode.externalApplication);
+                await launchUrl(url, mode: LaunchMode.externalApplication);
               } else {
                 ScaffoldMessenger.of(context).showSnackBar(
                     const SnackBar(content: Text("Can't Launch Right now")));

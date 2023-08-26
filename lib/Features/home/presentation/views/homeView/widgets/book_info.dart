@@ -1,4 +1,5 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
+import 'package:bookly/Features/home/presentation/views/book_details_view/widgets/rate.dart';
 import 'package:bookly/Features/home/presentation/views/homeView/widgets/apiprice.dart';
 import 'package:bookly/Features/home/presentation/views/homeView/widgets/authors.dart';
 import 'package:flutter/material.dart';
@@ -30,9 +31,11 @@ class BookInfo extends StatelessWidget {
               width: MediaQuery.of(context).size.height * .09,
               child: AspectRatio(
                   aspectRatio: Kcoveraspectration,
-                  child: book.volumeInfo!.imageLinks==null?const Center(child:  CircularProgressIndicator()): BookCover(
-                    imagelink: book.volumeInfo!.imageLinks!.thumbnail!,
-                  )),
+                  child: book.volumeInfo!.imageLinks == null
+                      ? const Center(child: CircularProgressIndicator())
+                      : BookCover(
+                          imagelink: book.volumeInfo!.imageLinks!.thumbnail!,
+                        )),
             ),
             const SizedBox(
               width: 15,
@@ -84,22 +87,7 @@ class PriceAndRate extends StatelessWidget {
         const Spacer(
           flex: 1,
         ),
-        Row(
-          children: [
-            Icon(
-              Icons.star,
-              color: Colors.amber.shade300,
-            ),
-            const Text(
-              "4.8 ",
-              style: Style.textstyle20,
-            ),
-            const Text(
-              "2289",
-              style: Style.textStyle16,
-            )
-          ],
-        )
+        Rate(avgrating: book.volumeInfo!.averageRating!, count:  book.volumeInfo!.ratingsCount!,)
       ],
     );
   }

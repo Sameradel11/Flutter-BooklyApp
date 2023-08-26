@@ -31,7 +31,7 @@ class SearchViewBody extends StatelessWidget {
                     .copyWith(color: Colors.white, fontWeight: FontWeight.w900),
               ),
             ),
-            const BestSellerListView()
+            const BestSellerListView(similarbooks: [],)
           ],
         ),
       ),

@@ -20,8 +20,8 @@ class BookCoversListView extends StatelessWidget {
           BlocProvider.of<FeaturedBookCubit>(context).isloading = false;
         } else if (state is FeaturedBooksFailure) {
           BlocProvider.of<FeaturedBookCubit>(context).isloading = true;
-          ScaffoldMessenger.of(context)
-              .showSnackBar(SnackBar(content: Text(state.errmessage)));
+          // ScaffoldMessenger.of(context)
+          //     .showSnackBar(SnackBar(content: Text(state.errmessage)));
         }
       },
       builder: (context, state) {
@@ -29,27 +29,28 @@ class BookCoversListView extends StatelessWidget {
           padding: const EdgeInsets.only(top: 16, bottom: 16),
           child: SizedBox(
             height: MediaQuery.of(context).size.height * 0.3,
-            child:  ListView.separated(
-                    physics: const BouncingScrollPhysics(),
-                    scrollDirection: Axis.horizontal,
-                    itemCount:
-                        booklist.length, // Use the length of your image list
-                    itemBuilder: (context, index) {
-                      return AspectRatio(
+            child: ListView.separated(
+              physics: const BouncingScrollPhysics(),
+              scrollDirection: Axis.horizontal,
+              itemCount: booklist.length, // Use the length of your image list
+              itemBuilder: (context, index) {
+                return booklist[index].volumeInfo!.imageLinks == null
+                    ? const SizedBox()
+                    : AspectRatio(
                         aspectRatio: 0.6,
-                        child:  BookCover(
-                                imagelink: booklist[index]
-                                    .volumeInfo!
-                                    .imageLinks!
-                                    .thumbnail!),
+                        child: BookCover(
+                            imagelink: booklist[index]
+                                .volumeInfo!
+                                .imageLinks!
+                                .thumbnail!),
                       );
-                    },
-                    separatorBuilder: (BuildContext context, int index) {
-                      return const SizedBox(
-                        width: 16,
-                      );
-                    },
-                  ),
+              },
+              separatorBuilder: (BuildContext context, int index) {
+                return const SizedBox(
+                  width: 16,
+                );
+              },
+            ),
           ),
         );
       },

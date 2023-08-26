@@ -23,8 +23,8 @@ class Bookly extends StatelessWidget {
             create: (context) => FeaturedBookCubit()
               ..fetchFeaturedBooks(subject: "Programming")),
         BlocProvider(
-            create: (context) =>
-                NewBooksCubit()..fetchNewBooks(subject: "programming"))
+            create: (context) => NewBooksCubit()
+              ..fetchNewBooks(subject: "love"))
       ],
       child: MaterialApp.router(
         debugShowCheckedModeBanner: false,

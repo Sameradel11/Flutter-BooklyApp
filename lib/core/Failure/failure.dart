@@ -20,6 +20,13 @@ class ServerFailure extends Failure {
         return ServerFailure(errmessage: "Recieve Timeout");
       case DioExceptionType.badCertificate:
         return ServerFailure(errmessage: "Bad Certificate");
+      case DioExceptionType.unknown:
+        if (dio.message==null||dio.message!.contains("Failed host") ||
+            dio.message!.contains("SocketException")) {
+          return ServerFailure(errmessage: "There is no Internet connection");
+        }
+        return ServerFailure(errmessage: "UnExpected Error");
+
       case DioExceptionType.badResponse:
         return ServerFailure.fromResponse(
             dio.response!.statusCode!, dio.response!.data);
@@ -30,10 +37,7 @@ class ServerFailure extends Failure {
       case DioExceptionType.connectionError:
         return ServerFailure(errmessage: "Connection Error");
 
-      case DioExceptionType.unknown:
-        if (dio.message!.contains("SocketException")) {
-          return ServerFailure(errmessage: "There is no Internet connection");
-        }
+      default:
         return ServerFailure(errmessage: "UnExpected Error");
     }
   }
@@ -47,8 +51,7 @@ class ServerFailure extends Failure {
       return ServerFailure(
           errmessage: "Internal Server error please try again later");
     } else if (statuscode == 429) {
-      return ServerFailure(
-          errmessage: response['error']['message']);
+      return ServerFailure(errmessage: response['error']['message']);
     } else {
       return ServerFailure(
           errmessage: "Oops! there is an error, please try again later");

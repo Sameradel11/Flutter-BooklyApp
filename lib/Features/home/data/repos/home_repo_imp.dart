@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:bookly/Features/home/data/models/book_model/book_model.dart';
 import 'package:bookly/Features/home/data/repos/home_repo.dart';
 import 'package:bookly/core/Failure/Failure.dart';
@@ -12,20 +14,20 @@ class HomeRepoImp implements HomeRepo {
       {required String subject}) async {
     try {
       print("fetchNewestBooks");
-      Map<String, dynamic> response = await apiclass.get(
-          endpoints:
-              "volumes?Filtering=free-ebooks&sorting=newest&q=subject:$subject");
+      Map<String, dynamic> response =
+          await apiclass.get(endpoints: "volumes?&sorting=newest&q=$subject");
       List<dynamic> bookitems = response['items'];
       List<BookModel> bookmodels = [];
       for (int i = 0; i < bookitems.length; i++) {
         bookmodels.add(BookModel.fromJsonData(bookitems[i]));
       }
-
       print("${bookmodels.length} ${bookitems.length}");
       return right(bookmodels);
     } catch (e) {
       if (e is DioException) {
         return left(ServerFailure.fromDioException(e));
+      } else if (e is SocketException) {
+        return left(ServerFailure(errmessage: "No Internet connection from NewBooks"));
       } else {
         return left(ServerFailure(errmessage: e.toString()));
       }
@@ -38,14 +40,14 @@ class HomeRepoImp implements HomeRepo {
     print("fetchNewestBooks");
 
     try {
-      Map<String, dynamic> response = await apiclass.get(
-          endpoints: "volumes?Filtering=free-ebooks&q=$subject");
+      Map<String, dynamic> response =
+          await apiclass.get(endpoints: "volumes?&q=$subject");
       List<BookModel> books = [];
       for (dynamic item in response['items']) {
         books.add(BookModel.fromJsonData(item as Map<String, dynamic>));
       }
       return right(books);
-    } on Exception catch (e) {
+    } catch (e) {
       if (e is DioException) {
         return left(ServerFailure.fromDioException(e));
       } else {
