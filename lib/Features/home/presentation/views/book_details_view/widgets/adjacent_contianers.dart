@@ -90,7 +90,7 @@ class AdjacentContainers extends StatelessWidget {
           width: MediaQuery.of(context).size.width * .4,
           child: TextButton(
             onPressed: () async {
-              final url = Uri.parse(book.volumeInfo!.previewLink!);
+              final url = Uri.parse(book.accessInfo!.webReaderLink!);
               bool urllaunchable = await canLaunchUrl(url);
 
               if (urllaunchable) {

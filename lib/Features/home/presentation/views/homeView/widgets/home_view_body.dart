@@ -1,11 +1,10 @@
 import 'package:bookly/Features/home/data/models/book_model/book_model.dart';
 import 'package:bookly/Features/home/presentation/view_model/new_books/new_books_cubit.dart';
-import 'package:bookly/Features/home/presentation/views/homeView/widgets/book_info.dart';
-import 'package:bookly/core/utils/app_route.dart';
-import 'package:flutter/cupertino.dart';
+import 'package:bookly/Features/home/presentation/views/homeView/widgets/new_book_sliver.dart';
+import 'package:bookly/Features/home/presentation/views/homeView/widgets/test.dart';
+import 'package:bookly/core/utils/methods.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:go_router/go_router.dart';
 import '../../../../../../core/utils/style.dart';
 import 'book_covers_listview.dart';
 import 'custom_app_bar.dart';
@@ -27,8 +26,7 @@ class HomeViewBody extends StatelessWidget {
           BlocProvider.of<NewBooksCubit>(context).isloading = false;
         } else if (state is NewBooksFailure) {
           BlocProvider.of<NewBooksCubit>(context).isloading = false;
-          ScaffoldMessenger.of(context)
-              .showSnackBar(SnackBar(content: Text(state.errmessage)));
+          showSnackbar(state, context);
         }
       },
       builder: (context, state) {
@@ -53,24 +51,15 @@ class HomeViewBody extends StatelessWidget {
               ],
             )),
             BlocProvider.of<NewBooksCubit>(context).isloading
-                ? const SliverToBoxAdapter(
-                    child: Center(child: CircularProgressIndicator()))
-                : SliverList(
-                    delegate: SliverChildBuilderDelegate(
-                      (BuildContext context, int index) {
-                        return booklist![index].volumeInfo!.imageLinks == null
-                            ? const SizedBox()
-                            : GestureDetector(
-                                onTap: () => GoRouter.of(context).push(
-                                    AppRouter.KDetailsView,
-                                    extra: booklist![index]),
-                                child: BookInfo(
-                                  book: booklist![index],
-                                ));
-                      },
-                      childCount: booklist!.length,
-                    ),
-                  ),
+                ? const SliverToBoxAdapter(child: Test())
+                : state is NewBooksFailure
+                    ? SliverToBoxAdapter(
+                        child: Center(
+                            child: Text(
+                        state.errmessage,
+                        style: Style.textStyle22,
+                      )))
+                    : NewBooksSliver(booklist: booklist!)
           ],
         );
       },

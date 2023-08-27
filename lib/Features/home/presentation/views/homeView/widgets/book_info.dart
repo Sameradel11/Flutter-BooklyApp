@@ -31,10 +31,10 @@ class BookInfo extends StatelessWidget {
               width: MediaQuery.of(context).size.height * .09,
               child: AspectRatio(
                   aspectRatio: Kcoveraspectration,
-                  child: book.volumeInfo!.imageLinks == null
+                  child: book.volumeInfo.imageLinks == null
                       ? const Center(child: CircularProgressIndicator())
                       : BookCover(
-                          imagelink: book.volumeInfo!.imageLinks!.thumbnail!,
+                          imagelink: book.volumeInfo.imageLinks!.thumbnail!,
                         )),
             ),
             const SizedBox(
@@ -45,7 +45,7 @@ class BookInfo extends StatelessWidget {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Text(
-                      book.volumeInfo!.title!,
+                      book.volumeInfo.title!,
                       style: Style.textstyle20,
                       overflow: TextOverflow.ellipsis,
                       maxLines: 2,
@@ -53,7 +53,7 @@ class BookInfo extends StatelessWidget {
                     const SizedBox(
                       height: 5,
                     ),
-                    Authors(authors: book.volumeInfo!.authors!),
+                    Authors(authors: book.volumeInfo.authors!),
                     PriceAndRate(
                       book: book,
                     ),
@@ -87,7 +87,7 @@ class PriceAndRate extends StatelessWidget {
         const Spacer(
           flex: 1,
         ),
-        Rate(avgrating: book.volumeInfo!.averageRating!, count:  book.volumeInfo!.ratingsCount!,)
+        Rate(avgrating: book.volumeInfo.averageRating!, count:  book.volumeInfo.ratingsCount!,)
       ],
     );
   }

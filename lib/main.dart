@@ -1,4 +1,4 @@
-import 'package:bookly/Features/home/presentation/view_model/cubit/book_cubit.dart';
+import 'package:bookly/Features/home/presentation/view_model/featured_books/featured_book_cubit.dart';
 import 'package:bookly/Features/home/presentation/view_model/new_books/new_books_cubit.dart';
 import 'package:bookly/const.dart';
 import 'package:bookly/core/utils/app_route.dart';
@@ -23,8 +23,8 @@ class Bookly extends StatelessWidget {
             create: (context) => FeaturedBookCubit()
               ..fetchFeaturedBooks(subject: "Programming")),
         BlocProvider(
-            create: (context) => NewBooksCubit()
-              ..fetchNewBooks(subject: "love"))
+            create: (context) =>
+                NewBooksCubit()..fetchNewBooks(subject: "ComputerScience"))
       ],
       child: MaterialApp.router(
         debugShowCheckedModeBanner: false,

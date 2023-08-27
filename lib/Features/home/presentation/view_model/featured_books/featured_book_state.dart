@@ -1,4 +1,4 @@
-part of 'book_cubit.dart';
+part of 'featured_book_cubit.dart';
 
 class FeaturedBooksStates {}
 

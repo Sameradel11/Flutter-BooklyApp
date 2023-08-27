@@ -19,26 +19,26 @@ class BookInfoSection extends StatelessWidget {
           child: AspectRatio(
               aspectRatio: 0.7,
               child: BookCover(
-                imagelink: book.volumeInfo!.imageLinks!.thumbnail!,
+                imagelink: book.volumeInfo.imageLinks!.thumbnail!,
               )),
         ),
         const SizedBox(
           height: 50,
         ),
         Text(
-          book.volumeInfo!.title!,
+          book.volumeInfo.title!,
           style: Style.textStyle22,
         ),
         const SizedBox(
           height: 10,
         ),
-        Authors(authors: book.volumeInfo!.authors!),
+        Authors(authors: book.volumeInfo.authors!),
         const SizedBox(
           height: 15,
         ),
         Rate(
-          avgrating: book.volumeInfo!.averageRating!,
-          count: book.volumeInfo!.ratingsCount!,
+          avgrating: book.volumeInfo.averageRating!,
+          count: book.volumeInfo.ratingsCount!,
         ),
         const SizedBox(height: 30),
         AdjacentContainers(book: book),
